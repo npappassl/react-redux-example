@@ -12,14 +12,17 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import ApplicationList from 'components/ApplicationList';
+
+
 import messages from './messages';
 
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class ApplicationsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <h1>
-        <FormattedMessage {...messages.pendingCVScreenTitle} />
+        <FormattedMessage {...messages.header} />
       </h1>
     );
   }

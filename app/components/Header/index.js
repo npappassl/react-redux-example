@@ -77,36 +77,43 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     render() {
         return (
             <HeaderDiv>
-              <LogoSpan>CAT</LogoSpan>
-              <NavUl>
-                  <NavLi>
-                      <FormattedMessage {...messages.applications} />
-                  </NavLi>
-                  <NavLi>
-                      <FormattedMessage {...messages.interviews} />
-                  </NavLi>
-                  <NavLi>
-                      <FormattedMessage {...messages.scheduleInterview} />
-                  </NavLi>
-                  <NavLi>
-                      <FormattedMessage {...messages.management} />
-                  </NavLi>
-              </NavUl>
-              <NavRightSpan>
-                  <SearchSpan>
-                      <SearchApplicationsInput placeholder='Search applications...' />
-                      <img src={search_icon} height="20" />
-                      <AdvancedSearchAnchor><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
-                  </SearchSpan>
-                  <SessionSpan>
-                      <NavBarIconImg src={user_icon} width="18"/>
-                      HR User
-                      <NavBarIconImg src={log_out_icon} width="24" />
-                  </SessionSpan>
-              </NavRightSpan>
-        </HeaderDiv>
+                <a href="/cat-webapp">
+                    <LogoSpan>CAT</LogoSpan>
+                </a>
+                <NavUl>
+                    <NavLi>
+                        <a href="/cat-webapp/applications">
+                            <FormattedMessage {...messages.applications} />
+                        </a>
+                    </NavLi>
+                    <NavLi>
+                        <a href="/cat-webapp/interviews">
+                            <FormattedMessage {...messages.interviews} />
+                        </a>
+                    </NavLi>
+                    <NavLi>
+                        <a href="/cat-webapp/sheduleinterview">
+                            <FormattedMessage {...messages.scheduleInterview} />
+                        </a>
+                    </NavLi>
+                    <NavLi>
+                        <FormattedMessage {...messages.management} />
+                    </NavLi>
+                </NavUl>
+                <NavRightSpan>
+                    <SearchSpan>
+                        <SearchApplicationsInput placeholder='Search applications...' />
+                        <img src={search_icon} height="20" />
+                        <AdvancedSearchAnchor href="#advancedSearch"><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
+                    </SearchSpan>
+                    <SessionSpan>
+                        <NavBarIconImg src={user_icon} width="18"/>
+                        HR User
+                        <NavBarIconImg src={log_out_icon} width="24" />
+                    </SessionSpan>
+                </NavRightSpan>
+            </HeaderDiv>
         );
     }
 }
-
 export default Header;

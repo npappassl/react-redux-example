@@ -6,8 +6,17 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.HomePage.header',
-    defaultMessage: 'This is HomePage component!',
-  },
+    pendingCVScreenTitle: {
+        id: 'app.components.ApplicationsPage.pendingCVScreenTitle',
+        defaultMessage: 'Pending CV Screening',
+    },
+    upcomingInterviewsTitle: {
+        id: 'app.components.ApplicationsPage.upcomingInterviewsTitle',
+        defaultMessage: 'My Upcoming Interviews',
+    },
+    toScoreTitle: {
+        id: 'app.components.ApplicationsPage.toScoreTitle',
+        defaultMessage: 'My Interviews To Score',
+    },
+
 });
