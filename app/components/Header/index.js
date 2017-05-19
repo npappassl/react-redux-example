@@ -82,17 +82,17 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                 </a>
                 <NavUl>
                     <NavLi>
-                        <a href="/cat-webapp#/applications">
+                        <a href="/cat-webapp/#/applications">
                             <FormattedMessage {...messages.applications} />
                         </a>
                     </NavLi>
                     <NavLi>
-                        <a href="/cat-webapp/interviews">
+                        <a href="/cat-webapp/#/interviews">
                             <FormattedMessage {...messages.interviews} />
                         </a>
                     </NavLi>
                     <NavLi>
-                        <a href="/cat-webapp/sheduleinterview">
+                        <a href="/cat-webapp/#/sheduleinterview">
                             <FormattedMessage {...messages.scheduleInterview} />
                         </a>
                     </NavLi>
