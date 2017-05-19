@@ -9,18 +9,58 @@
  * the linting exception.
  */
 
+ import APICalls from '../../APIs/index';
+
+
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import { sendApplicationsRequest } from './actions/applicationActions';
 import messages from './messages';
 
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props){
+        super(props);
+        const self = this;
+        // window.getApps = APICalls.getApplications;
+        // APICalls.getApplications().then(response => console.log(response));
+// =======================================================================================
+        // console.log(self.props.actions.getApplications);
+        // self.props.actions.getApplications();
+    }
   render() {
-    return (
-      <h1>
-        <FormattedMessage {...messages.pendingCVScreenTitle} />
-      </h1>
-    );
+      return (
+          <div>
+              <h1>
+                  <FormattedMessage {...messages.pendingCVScreenTitle} />
+              </h1>
+              <ul>
+                  {/* {applications.map((appItem) => {
+                      return (<li>appItem.name</li>)
+                  })} */}
+              </ul>
+          </div>
+      );
   }
 }
+
+function mapStateToProps(state){
+    return{
+        applications: state.applications
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    const allActions = {
+        getApplications: sendApplicationsRequest
+    }
+
+    return {
+        actions: bindActionCreators(allActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

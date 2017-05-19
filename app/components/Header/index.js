@@ -82,7 +82,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                 </a>
                 <NavUl>
                     <NavLi>
-                        <a href="/cat-webapp/applications">
+                        <a href="/cat-webapp#/applications">
                             <FormattedMessage {...messages.applications} />
                         </a>
                     </NavLi>
