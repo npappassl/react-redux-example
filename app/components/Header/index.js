@@ -77,7 +77,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     render() {
         return (
             <HeaderDiv>
-                <a href="/cat-webapp">
+                <a href="/cat-webapp/#/">
                     <LogoSpan>CAT</LogoSpan>
                 </a>
                 <NavUl>
@@ -104,7 +104,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                     <SearchSpan>
                         <SearchApplicationsInput placeholder='Search applications...' />
                         <img src={search_icon} height="20" />
-                        <AdvancedSearchAnchor href="#advancedSearch"><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
+                        <AdvancedSearchAnchor href="/cat-webapp/#/advancedSearch"><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
                     </SearchSpan>
                     <SessionSpan>
                         <NavBarIconImg src={user_icon} width="18"/>

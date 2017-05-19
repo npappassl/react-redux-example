@@ -84,10 +84,7 @@ const render = (messages) => {
                   // Scroll to top when going to a new page, imitating default browser
                   // behaviour
                   applyRouterMiddleware(useScroll())
-              }
-          >
-              <IndexRoute path="/cat-webapp" component={HomePage}/>
-          </Router>
+              } />
       </LanguageProvider>
     </Provider>,
     document.getElementById('app')
