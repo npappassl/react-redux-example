@@ -8,8 +8,8 @@ const webpack = require('webpack');
 module.exports = (options) => ({
   entry: options.entry,
   output: Object.assign({ // Compile into js/build.js
-    path: path.resolve(process.cwd(), ''),
-    publicPath: '/cat-webapp/',
+    path: path.resolve(process.cwd(), 'build'),
+    publicPath: '/cat-webapp/build/',
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [{
