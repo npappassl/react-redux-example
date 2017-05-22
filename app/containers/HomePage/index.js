@@ -25,7 +25,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     constructor(props){
         super(props);
         const self = this;
-        // window.getApps = APICalls.getApplications;
+        window.getApps = APICalls.getApplications;
         // APICalls.getApplications().then(response => console.log(response));
 // =======================================================================================
         // console.log(self.props.actions.getApplications);

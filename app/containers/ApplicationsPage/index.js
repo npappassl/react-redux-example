@@ -21,9 +21,12 @@ import messages from './messages';
 export default class ApplicationsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+        <div>
+            <h1>
+                <FormattedMessage {...messages.header} />
+            </h1>
+            <a href="#/createapplication"> + Create application</a>
+        </div>
     );
   }
 }

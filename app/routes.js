@@ -18,6 +18,23 @@ export default function createRoutes(store) {
 
   return [
       {
+          path: '/',
+          name: 'home',
+          getComponent(nextState, cb) {
+              const importModules = Promise.all([
+                  import('containers/HomePage'),
+              ]);
+
+              const renderRoute = loadModule(cb);
+
+              importModules.then(([component]) => {
+                  renderRoute(component);
+              });
+
+              importModules.catch(errorLoading);
+          },
+      },
+      {
           path: '/applications',
           name: 'applications',
           getComponent(nextState, cb) {
@@ -34,31 +51,31 @@ export default function createRoutes(store) {
               importModules.catch(errorLoading);
           },
       },
-    {
-      path: '/',
-      name: 'home',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/HomePage'),
-        ]);
+      {
+          path: '/createapplication',
+          name: 'createapplication',
+          getComponent(nextState, cb) {
+              const importModules = Promise.all([
+                  import('containers/CreateApplicationPage'),
+              ]);
 
-        const renderRoute = loadModule(cb);
+              const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
-          renderRoute(component);
-        });
+              importModules.then(([component]) => {
+                  renderRoute(component);
+              });
 
-        importModules.catch(errorLoading);
+              importModules.catch(errorLoading);
+          },
       },
-    },
-    {
-      path: '*',
-      name: 'notfound',
-      getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+      {
+          path: '*',
+          name: 'notfound',
+          getComponent(nextState, cb) {
+              import('containers/NotFoundPage')
+              .then(loadModule(cb))
+              .catch(errorLoading);
+          },
       },
-    },
   ];
 }
