@@ -1,0 +1,67 @@
+export default class APIcalls {
+    static getNotCompletedApplications() {
+        const request = new Request("services/application/notCompleted", {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            if(response.ok){
+                return response;
+            } else {
+                throw Error(response.statusText);
+                return response;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+    static getApplications() {
+        const request = new Request("services/application/appsForSift", {
+            method: "GET",
+            credentials: "include"
+        });
+
+        return fetch(request).then(response => {
+            return response.json();
+        }).catch(error => {
+            return error
+        });
+    }
+    static saveCreateApplication(formData) {
+        const request = new Request("services/application/form/saveCreateApplication", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(formData),
+            headers:{
+                "Content-Type": "multipart/form-data;"
+            }
+        });
+
+        return fetch(request).then(response => {
+            return response.json();
+        }).catch(error => {
+            return error
+        });
+    }
+    static askIfDuplicate(formData) {
+        const baseUrl = "services/application/form/checkIfIsDuplicate";
+        let urlParams = "?";
+        formData.map(item => {
+            if(urlParams==="?"){
+                urlParams += item.name+"="+item.value;
+            }else {
+                urlParams += "&"+item.name+"="+item.value;
+            }
+        });
+        const request = new Request(baseUrl + urlParams, {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            return response.json();
+        }).catch(error => {
+            return error
+        });
+    }
+}

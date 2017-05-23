@@ -9,6 +9,13 @@
  * the linting exception.
  */
 
+// ===================================
+
+
+// -==================================
+
+
+
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -25,12 +32,6 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
         super(props);
         const self = this;
         self.props.actions.sendApplicationsRequest();
-        // console.log(props.dispatch);
-        // APICalls.getNotCompletedApplications().then((response) => {
-        //     console.log(response);
-        //     props.dispatch(() => {return dispatchAction(response.payload)});
-        // });
-
     }
     render() {
         if(this.props.applications){
@@ -41,8 +42,14 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
                     </h1>
                     <a href="#/createapplication"> + Create application</a>
                     <div>
-                        there are applications
                         <ApplicationList applicationList={this.props.applications}/>
+                        {/* Mock ApplicationList  */}
+                        {/* <ApplicationList applicationList={{applications:[
+                            { id: 2, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Bristol"}},
+                            { id: 3, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Newcastle"}}
+
+                        ]}}/> */}
+
                     </div>
                 </div>
             )
