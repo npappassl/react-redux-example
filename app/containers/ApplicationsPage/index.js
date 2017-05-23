@@ -11,22 +11,65 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import ApplicationList from 'components/ApplicationList';
-
+import APICalls from 'APIs/index';
+import * as applicationActions  from './actions/index';
 
 import messages from './messages';
 
+class ApplicationsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+    constructor(props){
+        super(props);
+        const self = this;
+        self.props.actions.sendApplicationsRequest();
+        // console.log(props.dispatch);
+        // APICalls.getNotCompletedApplications().then((response) => {
+        //     console.log(response);
+        //     props.dispatch(() => {return dispatchAction(response.payload)});
+        // });
 
-export default class ApplicationsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-        <div>
-            <h1>
-                <FormattedMessage {...messages.header} />
-            </h1>
-            <a href="#/createapplication"> + Create application</a>
-        </div>
-    );
-  }
+    }
+    render() {
+        if(this.props.applications){
+            return (
+                <div>
+                    <h1>
+                        <FormattedMessage {...messages.header} />
+                    </h1>
+                    <a href="#/createapplication"> + Create application</a>
+                    <div>
+                        there are applications
+                        <ApplicationList applicationList={this.props.applications}/>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <h1>
+                        <FormattedMessage {...messages.header} />
+                    </h1>
+                    <a href="#/createapplication"> + Create application</a>
+                </div>
+            );
+        }
+    }
 }
+function mapStateToProps(state){
+    // console.log("from mapStateToProps ApplicationsPage",state.get("applicationPageStore"),state.get("applicationPageStore").get("applicationList"));
+    return {
+        applications: state.get("applicationPageStore")
+    };
+}
+function mapDispatchToProps(dispatch){
+    const allActions = {
+        sendApplicationsRequest: applicationActions.sendApplicationsRequest,
+    };
+    return {
+        actions: bindActionCreators(allActions, dispatch)
+    };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ApplicationsPage);

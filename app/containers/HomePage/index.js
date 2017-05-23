@@ -25,7 +25,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     constructor(props){
         super(props);
         const self = this;
-        window.getApps = APICalls.getApplications;
+        // window.getApps = APICalls.getNotCompletedApplications;
         // APICalls.getApplications().then(response => console.log(response));
 // =======================================================================================
         // console.log(self.props.actions.getApplications);
@@ -49,7 +49,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 
 function mapStateToProps(state){
     return{
-        applications: state.applications
+        applications: state.applicationPageStore
     }
 }
 

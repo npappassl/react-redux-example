@@ -6,16 +6,37 @@ const ListWrapperDiv = styled.div`
 
 `;
 
-class ApplicationList extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class ApplicationList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props){
+        super(props);
+        console.log("from ApplicationList component",props.applicationList);
+    }
     render() {
-        return (
-            <ListWrapperDiv>
-                <h2></h2>
-                <ul>
-                    <li>test 1</li>
-                </ul>
-            </ListWrapperDiv>
-        );
+        const { applicationList } = this.props;
+        console.log(applicationList);
+        if(applicationList.applications){
+            return (
+                <ListWrapperDiv>
+                    <h2>ApplicationList</h2>
+                    <ul>
+                        {applicationList.applications.map((item) => {return (
+                            <li>{item.fisrtName}</li>
+                        )})}
+                    </ul>
+
+                </ListWrapperDiv>
+            );
+        } else {
+            return (
+                <ListWrapperDiv>
+                    <h2>ApplicationList</h2>
+                    <ul>
+                        <li>test 1</li>
+                    </ul>
+
+                </ListWrapperDiv>
+            )
+        }
     }
 }
 
