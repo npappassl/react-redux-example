@@ -1,37 +1,61 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default class FilterList extends React.PureComponent{
+class FilterList extends React.PureComponent{
     constructor(props){
         super(props);
         console.log("from FilterList", this.props.applicationList);
+        this.generateFilterValues = generateFilterValues.bind(this);
         this.filterValues = [];
-        this.generateFilterValues();
 
     }
-    generateFilterValues(){
-        if(!this.props.applicationList.applications){
-            setTimeout(this.generateFilterValues,100);
-            return;
-        }
-        for (let app of this.props.applicationList.applications){
-            console.log(app);
-        }
+    componentWillMount(){
+        this.generateFilterValues();
     }
-    renderJobTitles(){
-        console.log("renderJobTitles");
+    renderDefaultList(){
+        console.log("renderDefaultList");
         return (
-            <div>
-                dikemou
-            </div>
+            <ul>
+                {this.filterValues.map((value) => {
+                    return (<li key={value||"emptyFilter"+this.props.type}>{value}</li>);})}
+            </ul>
+        );
+    }
+    renderOffices(){
+        console.log("renderOffices");
+        return (
+            <ul>
+                {this.filterValues.map((value) => {
+                    console.log(value);
+                    return (<li key={value.id}>{value.description}</li>);})
+                }
+            </ul>
         );
     }
     render(){
         switch (this.props.type) {
-            case "jobTitle":
-                return this.renderJobTitles();
+            case "office":
+                return this.renderOffices();
                 break;
             default:
-                return(<div></div>);
+                return this.renderDefaultList();
         }
     }
 }
+function generateFilterValues(){
+    console.log("this.props",this.props);
+    const key = this.props.type;
+    const appList = this.props.applicationList.applications;
+    for (let app of appList){
+        if(this.filterValues.indexOf(app[key])<0){
+            this.filterValues.push(app[key]);
+        }
+    }
+}
+function mapStateToProps(state){
+    return {
+        applicationList: state.get("applicationPageStore"),
+        activeFilters: state.get("filterApplications")
+    };
+}
+export default connect(mapStateToProps)(FilterList)

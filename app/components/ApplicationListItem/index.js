@@ -7,10 +7,8 @@ const Td = styled.td`
     padding: 10px;
 `;
 export default class ApplicationListItem extends React.PureComponent{
-    // constructor(pro)
     render(){
         const { item } = this.props;
-        console.log(item);
         return(
             <Tr key={item.id}>
                 <Td>{item.firstName+" "+item.lastName}</Td>

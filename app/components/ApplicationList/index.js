@@ -18,6 +18,7 @@ const TBody = styled.tbody`
 `;
 const Table = styled.table`
     width: 100%;
+    border-collapse: collapse;
 `;
 const Tr = styled.tr`
 `;
@@ -25,6 +26,8 @@ const Th = styled.th`
     text-transform: uppercase;
     border-bottom: solid black;
     box-sizing: border-box;
+    display: run-in;
+    margin-left: 5px;
     &::after{
         content: "⬪";
     }
@@ -32,11 +35,10 @@ const Th = styled.th`
 class ApplicationList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props){
         super(props);
-        console.log("from ApplicationList component",props.applicationList);
+        // console.log("from ApplicationList component",props.applicationList);
     }
     render() {
         const { applicationList } = this.props;
-        console.log(applicationList);
         if(applicationList.applications){
             return (
                 <ListWrapperDiv>
@@ -55,9 +57,11 @@ class ApplicationList extends React.PureComponent { // eslint-disable-line react
                             </tr>
                         </thead>
                         <TBody>
-                            {applicationList.applications.map((item) => {return (
-                                <ApplicationListItem key={item.id} item={item} />
-                            )})}
+                            {applicationList.applications.map((item) => {
+                                return (
+                                    <ApplicationListItem key={item.id} item={item} />
+                                )
+                            })}
                         </TBody>
                     </Table>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 import FilterList from './FilterList';
@@ -8,7 +7,6 @@ const FilterSideBarWraperDiv = styled.div`
     color: white;
     background-color: #333;
     width: 25vw;
-    ${''/* float: right; */}
     height: 100vh;
     position: absolute;
     top:40px;
@@ -24,36 +22,27 @@ const Ul = styled.ul`
     list-style: none;
 `;
 
-class FilterSideBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    constructor(props){
-        super(props);
-        console.log("from ApplicationList component",props.applicationList);
-    }
-    appendJobTitleFilter(){
-
-    }
+export default class FilterSideBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render(){
         return(
             <FilterSideBarWraperDiv>
                 <h2>FILTERS</h2>
                 <Ul>
-                    <li>
+                    <li key="jobTitle">
                         Job Titles
-                        <Ul>
-                            <FilterList type="jobTitle" applicationList={this.props.applicationList} />
-                        </Ul>
+                        <FilterList type="jobTitle" />
                     </li>
-                    <li>
+                    <li key="office">
                         Offices
-                        <select type="select"/>
+                        <FilterList type="office" />
                     </li>
-                    <li>
+                    <li key="filterStage">
                         Stages
-                        <select type="select"/>
+                        <FilterList type="filterStage" />
                     </li>
-                    <li>
+                    <li key="source">
                         Sources
-                        <select type="select"/>
+                        <FilterList type="source" />
                     </li>
 
                 </Ul>
@@ -61,5 +50,3 @@ class FilterSideBar extends React.PureComponent { // eslint-disable-line react/p
         );
     }
 }
-
-export default connect()(FilterSideBar)

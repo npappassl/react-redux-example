@@ -36,7 +36,10 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
     constructor(props){
         super(props);
         const self = this;
+        // PRODUCTION
         self.props.actions.sendApplicationsRequest();
+        // DEVELOPMENT TODO remove mock applications
+        // self.props.actions.makeMockApplications();
     }
     render() {
         if(this.props.applications){
@@ -47,14 +50,8 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
                         <ResultCountSpan>({this.props.applications.applications?this.props.applications.applications.length:0} results)</ResultCountSpan>
                     </h1>
                     <CreateApplicationA href="#/createapplication"> <span>+</span> Create application</CreateApplicationA>
-                    {/* Mock ApplicationList  */}
-                    {/* <ApplicationList applicationList={{applications:[
-                        { id: 2, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Bristol"}},
-                        { id: 3, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Newcastle"}}
-
-                    ]}}/> */}
                     <ApplicationList applicationList={this.props.applications} />
-                    <FilterSideBar applicationList={this.props.applications} />
+                    <FilterSideBar />
                 </WraperDiv>
             )
         } else {
@@ -67,15 +64,15 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
     }
 }
 function mapStateToProps(state){
-    // console.log("from mapStateToProps ApplicationsPage",state.get("applicationPageStore"),state.get("applicationPageStore").get("applicationList"));
     return {
         applications: state.get("applicationPageStore"),
-        filterApplications: state.get("filterApplications")
+        activeFilters: state.get("filterApplications")
     };
 }
 function mapDispatchToProps(dispatch){
     const allActions = {
         sendApplicationsRequest: applicationActions.sendApplicationsRequest,
+        makeMockApplications: applicationActions.makeMockApplications
     };
     return {
         actions: bindActionCreators(allActions, dispatch)
