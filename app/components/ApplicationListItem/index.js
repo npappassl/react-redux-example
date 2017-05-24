@@ -18,6 +18,7 @@ export default class ApplicationListItem extends React.PureComponent{
                 <Td>{item.date}</Td>
                 <Td>{item.jobTitleInternal}</Td>
                 <Td>{item.office.description}</Td>
+                <Td>{item.duration}</Td>
                 <Td>{item.stage}</Td>
                 <Td>{item.referralSource}</Td>
             </Tr>

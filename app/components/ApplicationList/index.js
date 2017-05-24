@@ -6,17 +6,18 @@ import styled from 'styled-components';
 import ApplicationListItem from 'components/ApplicationListItem';
 
 const ListWrapperDiv = styled.div`
-
+    width:70vw;
 `;
 const TBody = styled.tbody`
     :nth-child(even) td{
         background-color: #cacaca;
     }
     :nth-child(odd) td{
-        background-color: #ddf;
+        background-color: #f3f3f7;
     }
 `;
 const Table = styled.table`
+    width: 100%;
 `;
 const Tr = styled.tr`
 `;
@@ -40,7 +41,7 @@ class ApplicationList extends React.PureComponent { // eslint-disable-line react
             return (
                 <ListWrapperDiv>
                     <h2>ApplicationList</h2>
-                    <table>
+                    <Table>
                         <thead>
                             <tr>
                                 <Th>Name</Th>
@@ -58,7 +59,7 @@ class ApplicationList extends React.PureComponent { // eslint-disable-line react
                                 <ApplicationListItem key={item.id} item={item} />
                             )})}
                         </TBody>
-                    </table>
+                    </Table>
 
                 </ListWrapperDiv>
             );

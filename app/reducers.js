@@ -11,7 +11,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 // import globalReducer from 'containers/App/reducer';
 import applicationsReducer from './reducers/applicationsReducer';
-
+import filterApplicationsReducer from 'reducers/filterApplicationsReducer';
 /*
  * routeReducer
  *
@@ -47,7 +47,8 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
-    applicationPageStore: applicationsReducer
+    applicationPageStore: applicationsReducer,
+    filterApplications: filterApplicationsReducer,
     // global: globalReducer,
 
     // ...asyncReducers,

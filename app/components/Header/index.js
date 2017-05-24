@@ -17,6 +17,7 @@ const HeaderDiv = styled.div`
     padding-left: 20px;
     padding-right: 20px;
     min-height: 40px;
+    z-index: 2;
 `;
 const NavUl = styled.ul`
     list-style: none;

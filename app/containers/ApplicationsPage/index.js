@@ -1,32 +1,37 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
-// ===================================
-
-
-// -==================================
-
-
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 
 import ApplicationList from 'components/ApplicationList';
+import FilterSideBar from 'components/FilterSideBar';
+
 import APICalls from 'APIs/index';
 import * as applicationActions  from './actions/index';
 
 import messages from './messages';
 
+const WraperDiv = styled.div`
+    width: 75vh;
+    display: inline-table;
+`;
+const ResultCountSpan = styled.span`
+    margin-left: 1em;
+    font-weight: 400;
+`;
+const CreateApplicationA = styled.a`
+    float: right;
+    display: inline-block;
+    line-height: 2em;
+
+    span{
+        font-weight: 900;
+        font-size: 2em;
+        vertical-align: middle;
+    }
+`;
 class ApplicationsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
     constructor(props){
         super(props);
@@ -36,30 +41,26 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
     render() {
         if(this.props.applications){
             return (
-                <div>
+                <WraperDiv>
                     <h1>
                         <FormattedMessage {...messages.header} />
+                        <ResultCountSpan>({this.props.applications.applications?this.props.applications.applications.length:0} results)</ResultCountSpan>
                     </h1>
-                    <a href="#/createapplication"> + Create application</a>
-                    <div>
-                        <ApplicationList applicationList={this.props.applications}/>
-                        {/* Mock ApplicationList  */}
-                        {/* <ApplicationList applicationList={{applications:[
-                            { id: 2, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Bristol"}},
-                            { id: 3, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Newcastle"}}
+                    <CreateApplicationA href="#/createapplication"> <span>+</span> Create application</CreateApplicationA>
+                    {/* Mock ApplicationList  */}
+                    {/* <ApplicationList applicationList={{applications:[
+                        { id: 2, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Bristol"}},
+                        { id: 3, name: "Nikolaos Papadopoulos", firstName: "Nikolaos", lastName: "Papadopoulos", email: "npappas@scottlogic.co.uk", jobTitle: "Leed Developer", jobTitleInternal: "Lead Developer", jobGroup: "Development", conclusion: null, office:{description:"Newcastle"}}
 
-                        ]}}/> */}
-
-                    </div>
-                </div>
+                    ]}}/> */}
+                    <ApplicationList applicationList={this.props.applications} />
+                    <FilterSideBar applicationList={this.props.applications} />
+                </WraperDiv>
             )
         } else {
             return (
                 <div>
-                    <h1>
-                        <FormattedMessage {...messages.header} />
-                    </h1>
-                    <a href="#/createapplication"> + Create application</a>
+                    Loading...
                 </div>
             );
         }
@@ -68,7 +69,8 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
 function mapStateToProps(state){
     // console.log("from mapStateToProps ApplicationsPage",state.get("applicationPageStore"),state.get("applicationPageStore").get("applicationList"));
     return {
-        applications: state.get("applicationPageStore")
+        applications: state.get("applicationPageStore"),
+        filterApplications: state.get("filterApplications")
     };
 }
 function mapDispatchToProps(dispatch){
