@@ -35,6 +35,8 @@ const CreateApplicationA = styled.a`
 class ApplicationsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
     constructor(props){
         super(props);
+    }
+    componentWillMount(){
         const self = this;
         // PRODUCTION
         self.props.actions.sendApplicationsRequest();
@@ -50,7 +52,10 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
                         <ResultCountSpan>({this.props.applications.applications?this.props.applications.applications.length:0} results)</ResultCountSpan>
                     </h1>
                     <CreateApplicationA href="#/createapplication"> <span>+</span> Create application</CreateApplicationA>
-                    <ApplicationList applicationList={this.props.applications} />
+                    <ApplicationList
+                        applicationList={this.props.applications}
+                        activeFilters={this.props.activeFilters}
+                        searchFilter={this.props.searchFilter} />
                     <FilterSideBar />
                 </WraperDiv>
             )
@@ -66,7 +71,8 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
 function mapStateToProps(state){
     return {
         applications: state.get("applicationPageStore"),
-        activeFilters: state.get("filterApplications")
+        activeFilters: state.get("filterApplications"),
+        searchFilter: state.get("searchFilter"),
     };
 }
 function mapDispatchToProps(dispatch){

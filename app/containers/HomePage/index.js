@@ -9,15 +9,16 @@
  * the linting exception.
  */
 
- import APICalls from '../../APIs/index';
-
-
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { sendApplicationsRequest } from './actions/applicationActions';
+import APICalls from 'APIs/index';
+import * as applicationActions  from './actions/index';
+
+import ApplicationsForSiftList from 'components/ApplicationsForSiftList/index';
+
 import messages from './messages';
 
 
@@ -31,17 +32,21 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         // console.log(self.props.actions.getApplications);
         // self.props.actions.getApplications();
     }
+    componentWillMount(){
+        const self = this;
+        // PRODUCTION
+        self.props.actions.sendApplicationsForSiftRequest();
+        // DEVELOPMENT TODO remove mock applications
+        // self.props.actions.makeMockApplicationsForSift();
+    }
+
   render() {
       return (
           <div>
               <h1>
                   <FormattedMessage {...messages.pendingCVScreenTitle} />
               </h1>
-              <ul>
-                  {/* {applications.map((appItem) => {
-                      return (<li>appItem.name</li>)
-                  })} */}
-              </ul>
+              <ApplicationsForSiftList applicationList={this.props.applicationsForSift}/>
           </div>
       );
   }
@@ -49,18 +54,20 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 
 function mapStateToProps(state){
     return{
-        applications: state.applicationPageStore
+        applicationsForSift: state.get("homePageAppsForSift"),
+        upcomingInterviews: state.get("homePageUpcomingInterviews"),
+        interviewsToScore: state.get("homePageInterviewsToScore"),
     }
 }
-
 function mapDispatchToProps(dispatch){
     const allActions = {
-        getApplications: sendApplicationsRequest
-    }
-
+        sendApplicationsForSiftRequest: applicationActions.sendApplicationsForSiftRequest,
+        makeMockApplicationsForSift: applicationActions.makeMockApplicationsForSift
+    };
     return {
         actions: bindActionCreators(allActions, dispatch)
-    }
+    };
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

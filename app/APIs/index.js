@@ -16,18 +16,24 @@ export default class APIcalls {
             console.log(error);
         });
     }
-    static getApplications() {
+    static getForSiftApplications() {
         const request = new Request("services/application/appsForSift", {
             method: "GET",
             credentials: "include"
         });
-
         return fetch(request).then(response => {
-            return response.json();
+            console.log(response);
+            if(response.ok){
+                return response;
+            } else {
+                throw Error(response.statusText);
+                return response;
+            }
         }).catch(error => {
-            return error
+            console.log(error);
         });
     }
+
     static saveCreateApplication(formData) {
         const request = new Request("services/application/form/saveCreateApplication", {
             method: "POST",

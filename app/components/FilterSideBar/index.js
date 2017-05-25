@@ -21,12 +21,14 @@ const Select = styled.select`
 const Ul = styled.ul`
     list-style: none;
 `;
-
+const H2 = styled.h2`
+    font-weight: 400;
+`;
 export default class FilterSideBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render(){
         return(
             <FilterSideBarWraperDiv>
-                <h2>FILTERS</h2>
+                <H2>FILTERS</H2>
                 <Ul>
                     <li key="jobTitle">
                         Job Titles

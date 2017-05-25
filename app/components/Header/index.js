@@ -2,10 +2,14 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 
+import SearchFilterInput from 'components/SearchFilterInput';
+
 import messages from './messages';
 import user_icon from './images/user_icon.svg';
 import search_icon from './images/search_icon.svg';
 import log_out_icon from './images/log_out_icon.svg';
+
+
 const HeaderDiv = styled.div`
     position: fixed;
     top:0;
@@ -43,19 +47,6 @@ const NavRightSpan = styled.span`
 `;
 const SearchSpan = styled.span`
     vertical-align: middle;
-`;
-const SearchApplicationsInput = styled.input`
-    background-color: white;
-    color:black;
-    width: 175px;
-    height: 30px;
-    font-size: 14px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    vertical-align: middle;
-    line-height: 20px;
-    padding: 4px 6px;
-    margin-bottom: 0;
-    margin-right: 10px;
 `;
 const AdvancedSearchAnchor = styled.a`
     font-size: 14px;
@@ -103,7 +94,8 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                 </NavUl>
                 <NavRightSpan>
                     <SearchSpan>
-                        <SearchApplicationsInput placeholder='Search applications...' />
+                        <SearchFilterInput placeholder="Search Applications..."/>
+                        {/* <SearchApplicationsInput placeholder='Search applications...' /> */}
                         <img src={search_icon} height="20" />
                         <AdvancedSearchAnchor href="/cat-webapp/#/advancedSearch"><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
                     </SearchSpan>

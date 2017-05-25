@@ -12,6 +12,10 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 // import globalReducer from 'containers/App/reducer';
 import applicationsReducer from './reducers/applicationsReducer';
 import filterApplicationsReducer from 'reducers/filterApplicationsReducer';
+import searchFilterReducer from 'reducers/searchFilterReducer';
+import homePageAppsForSiftReducer from 'reducers/homePageAppsForSiftReducer';
+import homePageUpcomingInterviewsReducer from 'reducers/homePageUpcomingInterviewsReducer';
+import homePageInterviewsToScoreReducer from 'reducers/homePageInterviewsToScoreReducer';
 /*
  * routeReducer
  *
@@ -49,6 +53,10 @@ export default function createReducer(asyncReducers) {
     language: languageProviderReducer,
     applicationPageStore: applicationsReducer,
     filterApplications: filterApplicationsReducer,
+    searchFilter: searchFilterReducer,
+    homePageAppsForSift: homePageAppsForSiftReducer,
+    homePageUpcomingInterviews: homePageUpcomingInterviewsReducer,
+    homePageInterviewsToScore: homePageInterviewsToScoreReducer,
     // global: globalReducer,
 
     // ...asyncReducers,
