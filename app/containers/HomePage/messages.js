@@ -6,6 +6,10 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+    homePageTitle: {
+        id: 'app.components.ApplicationsPage.title',
+        defaultMessage: "HomePage",
+    },
     pendingCVScreenTitle: {
         id: 'app.components.ApplicationsPage.pendingCVScreenTitle',
         defaultMessage: 'Pending CV Screening',

@@ -39,9 +39,9 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
     componentWillMount(){
         const self = this;
         // PRODUCTION
-        self.props.actions.sendApplicationsRequest();
+        // self.props.actions.sendApplicationsRequest();
         // DEVELOPMENT TODO remove mock applications
-        // self.props.actions.makeMockApplications();
+        self.props.actions.makeMockApplications();
     }
     render() {
         if(this.props.applications){

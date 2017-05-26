@@ -17,7 +17,9 @@ import { bindActionCreators } from 'redux';
 import APICalls from 'APIs/index';
 import * as applicationActions  from './actions/index';
 
-import ApplicationsForSiftList from 'components/ApplicationsForSiftList/index';
+import ApplicationForSiftList from 'components/ApplicationForSiftList/index';
+import UpcomingInterviewList from 'components/UpcomingInterviewList/index';
+import InterviewToScoreList from 'components/InterviewToScoreList/index';
 
 import messages from './messages';
 
@@ -36,17 +38,23 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         const self = this;
         // PRODUCTION
         self.props.actions.sendApplicationsForSiftRequest();
+        self.props.actions.sendUpcomingInterviewsRequest();
+        self.props.actions.sendInterviewsToScoreRequest();
         // DEVELOPMENT TODO remove mock applications
         // self.props.actions.makeMockApplicationsForSift();
+        // self.props.actions.makeMockUpcomingInterviews();
+        // self.props.actions.makeMockInterviewsToScore();
     }
 
   render() {
       return (
           <div>
               <h1>
-                  <FormattedMessage {...messages.pendingCVScreenTitle} />
+                  <FormattedMessage {...messages.homePageTitle} />
               </h1>
-              <ApplicationsForSiftList applicationList={this.props.applicationsForSift}/>
+              <ApplicationForSiftList applicationList={this.props.applicationsForSift}/>
+              <UpcomingInterviewList applicationList={this.props.upcomingInterviews}/>
+              <InterviewToScoreList applicationList={this.props.interviewsToScore} />
           </div>
       );
   }
@@ -62,7 +70,11 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     const allActions = {
         sendApplicationsForSiftRequest: applicationActions.sendApplicationsForSiftRequest,
-        makeMockApplicationsForSift: applicationActions.makeMockApplicationsForSift
+        sendUpcomingInterviewsRequest: applicationActions.sendUpcomingInterviewsRequest,
+        sendInterviewsToScoreRequest: applicationActions.sendInterviewsToScoreRequest,
+        makeMockApplicationsForSift: applicationActions.makeMockApplicationsForSift,
+        makeMockUpcomingInterviews: applicationActions.makeMockUpcomingInterviews,
+        makeMockInterviewsToScore: applicationActions.makeMockInterviewsToScore,
     };
     return {
         actions: bindActionCreators(allActions, dispatch)

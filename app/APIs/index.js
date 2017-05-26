@@ -33,6 +33,40 @@ export default class APIcalls {
             console.log(error);
         });
     }
+    static getMyUpcomingInterviews() {
+        const request = new Request("services/interview/my_upcoming_interviews", {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            if(response.ok){
+                return response;
+            } else {
+                throw Error(response.statusText);
+                return response;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+    static getMyUpcomingInterviewsToScore() {
+        const request = new Request("services/interview/my_upcoming_interviews_to_score", {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            if(response.ok){
+                return response;
+            } else {
+                throw Error(response.statusText);
+                return response;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
 
     static saveCreateApplication(formData) {
         const request = new Request("services/application/form/saveCreateApplication", {
