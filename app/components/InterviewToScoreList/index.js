@@ -54,10 +54,10 @@ class InterviewToScoreList extends React.PureComponent { // eslint-disable-line 
                             </tr>
                         </thead>
                         <TBody>
-                            {applicationList.map((item) => {
+                            {applicationList.map((item,index) => {
                                 console.log(item);
                                 return (
-                                    <ApplicationListItem key={item.id} type="toScore" item={item} />
+                                    <ApplicationListItem key={index} type="toScore" item={item} />
                                 );
                             })}
                         </TBody>

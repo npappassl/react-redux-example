@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import ApplicationList from 'components/ApplicationList';
 import FilterSideBar from 'components/FilterSideBar';
 
-import APICalls from 'APIs/index';
 import * as applicationActions  from './actions/index';
 
 import messages from './messages';
@@ -39,9 +38,9 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
     componentWillMount(){
         const self = this;
         // PRODUCTION
-        // self.props.actions.sendApplicationsRequest();
+        self.props.actions.sendApplicationsRequest();
         // DEVELOPMENT TODO remove mock applications
-        self.props.actions.makeMockApplications();
+        // self.props.actions.makeMockApplications();
     }
     render() {
         if(this.props.applications){
@@ -78,7 +77,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     const allActions = {
         sendApplicationsRequest: applicationActions.sendApplicationsRequest,
-        makeMockApplications: applicationActions.makeMockApplications
+        // makeMockApplications: applicationActions.makeMockApplications
     };
     return {
         actions: bindActionCreators(allActions, dispatch)

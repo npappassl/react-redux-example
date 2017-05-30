@@ -16,6 +16,24 @@ export default class APIcalls {
             console.log(error);
         });
     }
+    static getNotCompletedApplicationDetail(id) {
+        const request = new Request("services/application/application?applicationId="+id, {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            if(response.ok){
+                return response;
+            } else {
+                throw Error(response.statusText);
+                return response;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
     static getForSiftApplications() {
         const request = new Request("services/application/appsForSift", {
             method: "GET",

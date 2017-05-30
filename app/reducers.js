@@ -16,6 +16,7 @@ import searchFilterReducer from 'reducers/searchFilterReducer';
 import homePageAppsForSiftReducer from 'reducers/homePageAppsForSiftReducer';
 import homePageUpcomingInterviewsReducer from 'reducers/homePageUpcomingInterviewsReducer';
 import homePageInterviewsToScoreReducer from 'reducers/homePageInterviewsToScoreReducer';
+import applicationDetailReducer from 'reducers/applicationDetailReducer';
 /*
  * routeReducer
  *
@@ -52,6 +53,7 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     language: languageProviderReducer,
     applicationPageStore: applicationsReducer,
+    applicationDetail: applicationDetailReducer,
     filterApplications: filterApplicationsReducer,
     searchFilter: searchFilterReducer,
     homePageAppsForSift: homePageAppsForSiftReducer,
