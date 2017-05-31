@@ -5,11 +5,16 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 
 import * as applicationActions  from './actions/index';
-
-import ActionButtonList from 'components/ActionButtonList/index';
-import Button from 'components/Button/index';
-import ActionRequests from 'components/ActionRequests/index';
-import ActionRequestModal from 'components/ActionRequestModal/index';
+import types from 'actions/types';
+import ActionButtonList from 'components/ActionButtonList';
+import Button from 'components/Button';
+import ActionRequests from 'components/ActionRequests';
+import ActionRequestModal from 'components/ActionRequestModal';
+import ApplicationDetailsTable from "./ApplicationDetailsTable";
+import ConfidentialFieldsTable from "./ConfidentialFieldsTable";
+import AppDetailButtonList from "./AppDetailButtonList";
+import NotesWidget from './NotesWidget';
+import document_icon from "./images/document_icon.svg";
 
 const WraperDiv = styled.div`
     display: flex;
@@ -34,18 +39,42 @@ const CreateApplicationA = styled.a`
         vertical-align: middle;
     }
 `;
-const AppDetailButtonList = styled.ul`
-`;
 const AppDetailList = styled.div`
     flex-grow: 1;
 `;
-const Th = styled.th`
-    text-align: left;
+const H1 = styled.h1`
+    font-size: 35pt;
+    text-transform: uppercase;
+    font-weight: 500;
+
+`;
+const H2 = styled.h2`
+    font-size: 25pt;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0;
+`;
+const H4 = styled.h4`
+    font-size: 20pt;
+    color: #222;
+    margin-top: 15px;
+    font-weight: 200;
+`;
+const Img = styled.img`
+    height: 40px;
+    display:block;
+    margin: 0 auto;
+`;
+const DocIconUl = styled.ul`
+    list-style: none;
+`;
+const DocIconLi = styled.li`
+    text-align: center;
+    width: 100px;
 `;
 class ApplicationDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
     constructor(props){
         super(props);
-        // this.setState({actionRequestModalActive: false});
         this.showActionRequestForm = this.showActionRequestForm.bind(this);
     }
     componentWillMount(){
@@ -53,28 +82,40 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
         self.props.actions.sendApplicationDetailRequest(self.props.routeParams.id);
     }
     showActionRequestForm(){
-        console.log("showActionRequestForm",!this.props.actionRequestModalActive);
-        // this.setState({actionRequestModalActive: !this.props.actionRequestModalActive});
+        this.props.dispatch({
+            type: types.OPEN_MODAL_NEW_REQUEST,
+        });
     }
     render() {
+        const {applicationDetail} = this.props;
         if(this.props.applicationDetail){
             return (
                 <WraperDiv>
                     <LeftFlex>
-                        <h1>
-                            {this.props.applicationDetail.candidate.first + " " + this.props.applicationDetail.candidate.last}
-                        </h1>
-                        <AppDetailButtonList>
-                            <span>Show History</span>
-                            <span>Edit Application</span>
-                            <span>Delete Application</span>
-                        </AppDetailButtonList>
+                        <AppDetailButtonList />
+                        <H1>
+                            {applicationDetail.candidate.first + " " + this.props.applicationDetail.candidate.last}
+                        </H1>
+                        <H2>
+                            {applicationDetail.office.description + ", " + applicationDetail.jobTitle.description + "("+ applicationDetail.jobTitleGroup.description +")"}
+                        </H2>
+                        <H4>
+                            {applicationDetail.stage}
+                        </H4>
+                        <DocIconUl>
+                            {applicationDetail.documents.map((doc) => {
+                                return (
+                                    <DocIconLi key={doc.id}>
+                                        <Img src={document_icon} />
+                                        <span>{doc.name}</span>
+                                    </DocIconLi>
+                                );
+                            })}
+                        </DocIconUl>
                         <section>
                             <h2>Action Requests</h2>
                             <hr/>
-                            <ActionRequests requests={this.props.applicationDetail.actionRequests}/>
-                            {/*  see how one writes dynamic text input updating state*/}
-                            <ActionRequestModal show={false && this.props.actionRequestModalActive} />
+                            <ActionRequests requests={applicationDetail.actionRequests}/>
                             <Button value="New Request"
                                 onClick={this.showActionRequestForm} />
                         </section>
@@ -83,83 +124,17 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
                             <hr/>
                         </section>
                         <section>
-                            <ActionButtonList buttonListPermissions={this.props.applicationDetail.appStatusPermissions}/>
+                            <ActionButtonList buttonListPermissions={applicationDetail.appStatusPermissions}/>
                         </section>
                     </LeftFlex>
                     <AppDetailList>
-                        <h2>Application Details</h2>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <Th>Address</Th>
-                                    <td>{this.props.applicationDetail.candidate.address}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Postcode</Th>
-                                    <td>{this.props.applicationDetail.candidate.postcode}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Email</Th>
-                                    <td>{this.props.applicationDetail.candidate.email}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Phone</Th>
-                                    <td>{this.props.applicationDetail.candidate.phoneNumber}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Job title as advertised</Th>
-                                    <td>{this.props.applicationDetail.jobTitleAsAdvertised}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Source</Th>
-                                    <td>{this.props.applicationDetail.source.description}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Referral source</Th>
-                                    <td>{this.props.applicationDetail.referalSource}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Application Date</Th>
-                                    <td>{this.props.applicationDetail.applicationDate}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <ApplicationDetailsTable item={applicationDetail} />
+                        <ConfidentialFieldsTable item={applicationDetail} />
                         <hr/>
-                        <h2>Confidential Fields</h2>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <Th>Current salary</Th>
-                                    <td>{this.props.applicationDetail.currentSalary}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Salary Expected</Th>
-                                    <td>{this.props.applicationDetail.salaryExpectation}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Visa Type</Th>
-                                    <td>{this.props.applicationDetail.visaType}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Visa Expiry Date</Th>
-                                    <td>{this.props.applicationDetail.visaExpiryDate}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Reasonable Adjustments</Th>
-                                    <td>{this.props.applicationDetail.reasonableAdjustments}</td>
-                                </tr>
-                                <tr>
-                                    <Th>Adjustment Details</Th>
-                                    <td>{this.props.applicationDetail.reasonableAdjustmentsDetails}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h2>Notes</h2>
-                        <form>
-                            <input></input>
-                            <input type="submit" value="save note" />
-                        </form>
+                        <NotesWidget notes={applicationDetail.notes}/>
                     </AppDetailList>
+                    {/*  see how one writes dynamic text input updating state*/}
+                    <ActionRequestModal dispatch={this.props.dispatch} show={this.props.modal} />
                 </WraperDiv>
             )
         } else {
@@ -174,7 +149,7 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
 function mapStateToProps(state){
     return {
         applicationDetail: state.get("applicationDetail"),
-        actionRequestModalActive: state.get("actionRequestModalActive"),
+        modal: state.get("modal"),
     };
 }
 function mapDispatchToProps(dispatch){
@@ -182,7 +157,8 @@ function mapDispatchToProps(dispatch){
         sendApplicationDetailRequest: applicationActions.sendApplicationDetailRequest,
     };
     return {
-        actions: bindActionCreators(allActions, dispatch)
+        actions: bindActionCreators(allActions, dispatch),
+        dispatch: dispatch
     };
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ApplicationDetailPage);

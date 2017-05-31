@@ -8,7 +8,8 @@ const StyledButton = styled.button`
     font-weight: 600;
     font-size: 0.8em;
     text-transform: uppercase;
-    :hover{
+
+    &:hover {
         background-color: #2284A1;
     }
 `;
@@ -17,6 +18,6 @@ export default class Button extends React.Component{
     render(){
         return (
             <StyledButton onClick={this.props.onClick}>{this.props.value}</StyledButton>
-        )
+        );
     }
 }

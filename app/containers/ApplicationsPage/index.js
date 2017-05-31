@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -37,10 +36,7 @@ class ApplicationsPage extends React.Component { // eslint-disable-line react/pr
     }
     componentWillMount(){
         const self = this;
-        // PRODUCTION
         self.props.actions.sendApplicationsRequest();
-        // DEVELOPMENT TODO remove mock applications
-        // self.props.actions.makeMockApplications();
     }
     render() {
         if(this.props.applications){
@@ -77,7 +73,6 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     const allActions = {
         sendApplicationsRequest: applicationActions.sendApplicationsRequest,
-        // makeMockApplications: applicationActions.makeMockApplications
     };
     return {
         actions: bindActionCreators(allActions, dispatch)

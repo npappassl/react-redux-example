@@ -16,7 +16,7 @@ export default defineMessages({
     },
     scheduleInterview: {
         id: 'boilerplate.components.Header.scheduleInterview',
-        defaultMessage: 'Shedule Interview'
+        defaultMessage: 'Schedule Interview'
     },
     management: {
         id: 'boilerplate.components.Header.management',

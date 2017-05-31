@@ -84,7 +84,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                         </a>
                     </NavLi>
                     <NavLi>
-                        <a href="/cat-webapp/#/sheduleinterview">
+                        <a href="/cat-webapp/#/scheduleinterview">
                             <FormattedMessage {...messages.scheduleInterview} />
                         </a>
                     </NavLi>
@@ -95,13 +95,12 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                 <NavRightSpan>
                     <SearchSpan>
                         <SearchFilterInput placeholder="Search Applications..."/>
-                        {/* <SearchApplicationsInput placeholder='Search applications...' /> */}
                         <img src={search_icon} height="20" />
                         <AdvancedSearchAnchor href="/cat-webapp/#/advancedSearch"><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
                     </SearchSpan>
                     <SessionSpan>
                         <NavBarIconImg src={user_icon} width="18"/>
-                        HR User
+                            {this.props.user.fullName||""}
                         <NavBarIconImg src={log_out_icon} width="24" />
                     </SessionSpan>
                 </NavRightSpan>

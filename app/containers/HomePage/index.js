@@ -10,6 +10,8 @@
  */
 
 import React from 'react';
+import styled from 'styled-components';
+
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,7 +23,9 @@ import UpcomingInterviewList from 'components/UpcomingInterviewList/index';
 import InterviewToScoreList from 'components/InterviewToScoreList/index';
 
 import messages from './messages';
-
+const H1 = styled.h1`
+    margin-top: 60px;
+`;
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentWillMount(){
@@ -33,9 +37,9 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     render() {
         return (
             <div>
-                <h1>
+                <H1>
                     <FormattedMessage {...messages.homePageTitle} />
-                </h1>
+                </H1>
                 <ApplicationForSiftList applicationList={this.props.applicationsForSift}/>
                 <UpcomingInterviewList applicationList={this.props.upcomingInterviews}/>
                 <InterviewToScoreList applicationList={this.props.interviewsToScore} />

@@ -37,7 +37,7 @@ export default class ApplicationListItem extends React.PureComponent{
     renderForSiftApplicationListItem(item){
         return (
             <Tr key={item.id}>
-                <Td>{item.firstName+" "+item.lastName}</Td>
+                <Td><A href={"#/application/"+item.id}>{item.firstName+" "+item.lastName}</A></Td>
                 <Td>{item.date}</Td>
                 <Td>{item.jobTitleInternal}</Td>
                 <Td>{item.office.description}</Td>

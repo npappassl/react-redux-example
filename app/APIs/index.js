@@ -1,4 +1,21 @@
 export default class APIcalls {
+    static getUserPermissions() {
+        const request = new Request("services/user/user", {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            if(response.ok){
+                return response;
+            } else {
+                throw Error(response.statusText);
+                return response;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
     static getNotCompletedApplications() {
         const request = new Request("services/application/notCompleted", {
             method: "GET",

@@ -12,15 +12,15 @@ const Li = styled.li`
     margin-right: 1em;
 `;
 const mapPermissionsActions = {
-    'allowedToCvSift': "Pass CV Sift",
-    'allowedToEnterCandidateDecision': "Enter Candidate Decision",
-    'allowedToInitialSift': "Pass Initial Sift",
-    'allowedToMakeOffer': "Make Offer",
-    'allowedToProgressApp': "Progress Application",
-    'allowedToRejectApp': "Reject Candidate",
-    'allowedToReopenApp': "Reopen Application",
-    'allowedToScheduleInterview': "Schedule Interview",
-    'allowedToWithdrawApp': "Withdraw Candidate"
+    'allowedToCvSift': {name: "Pass CV Screen", url:""},
+    'allowedToEnterCandidateDecision': {name:"Enter Candidate Decision", url:""},
+    'allowedToInitialSift': {name: "Pass Initial Sift", url: "applications/appInitialSift" },
+    'allowedToMakeOffer': {name:"Make Offer", url:""},
+    'allowedToProgressApp': {name:"Progress Application", url:""},
+    'allowedToRejectApp': {name:"Reject Candidate", url:""},
+    'allowedToReopenApp': {name:"Reopen Application", url:""},
+    'allowedToScheduleInterview': {name:"Schedule Interview", url:""},
+    'allowedToWithdrawApp': {name:"Withdraw Candidate", url:""}
 }
 export default class ActionButtonList extends React.Component{
     render(){
@@ -28,7 +28,7 @@ export default class ActionButtonList extends React.Component{
             <Ul>
                 {Object.keys(this.props.buttonListPermissions).map((key,index)=>{
                     if(this.props.buttonListPermissions[key]===true){
-                        return (<Li><Button value={mapPermissionsActions[key]}/></Li>)
+                        return (<Li key={key} ><Button value={mapPermissionsActions[key].name}/></Li>)
                     }
                 })}
             </Ul>

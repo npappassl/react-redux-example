@@ -44,6 +44,7 @@ injectGlobal`
 
   #app {
     background-color: #fafafa;
+    margin-top: -40px;
     min-height: 100%;
     min-width: 100%;
   }

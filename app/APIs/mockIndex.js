@@ -1,4 +1,25 @@
 export default class MockAPIcalls {
+    static getUserPermissions() {
+        const user = {
+            "fullName":"HR User","ldap":"hruser",
+            "allowed":[
+                "ACCESS_ALL","DELETE_APPLICATIONS","EDIT_APPLICATIONS","SEARCH_APPLICATIONS","CREATE_APPLICATIONS","SCHEDULE_INTERVIEW","MANAGE_ACCESS_NOTES_AND_CONFIDENTIAL_NOTES","UPDATE_DELETE_INTERVIEW","MANAGE_SKILLS","MANAGE_MEETING_ROOMS","MANAGE_CONFERENCE_LINES","MANAGE_INTERVIEWERS","MANAGE_CV_SCREENERS","MANAGE_SECURITY_TAGS","MANAGE_APPLICATION_SOURCES","MANAGE_GROUPS","MANAGE_QUESTIONS","VIEW_POTENTIAL_DUPES","VIEW_DOCUMENTS_AND_INTERVIEWS_FOR_HIRES","CHANGE_CONFIG",
+                "MANAGE_INTERVIEW_TYPES","MANAGE_MAIL_PROCESSOR","MANAGE_LINK_TYPES","MANAGE_ACTION_REQUEST_TARGETS"
+            ],"disallowed":[],"resourceAllowed":[
+                "VIEW_APPLICATIONS","VIEW_APPLICATION_HISTORY","VIEW_UPCOMING_INTERVIEWS","ADD_EDIT_SCORES_FOR_OTHERS","VIEW_CONFIDENTIAL_FIELDS","APP_INITIAL_CV_SIFT","APP_CV_SIFT","APP_PROGRESS_DECISION","APP_REOPEN","APP_WITHDRAW_CANDIDATE","APP_MAKE_OFFER","APP_CANDIDATE_DECISION","APP_REJECT"
+            ],
+            "resourceDisallowed":[],"applicationsPageVisible":true,"interviewsPageVisible":true,"cvSiftVisible":true,"permissionsRetrieved":true,"userExistsInSecurityService":true
+        }
+        const request = new Request("services/user/user", {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            return {json: () => user};
+        });
+
+    }
     static getNotCompletedApplications() {
         const mockNotCompleted = {
             applications:[

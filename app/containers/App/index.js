@@ -12,19 +12,41 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as actions from 'actions';
+
 import Header from 'components/Header';
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
   };
+  componentWillMount(){
+      this.props.actions.sendUserPermissionsRequest();
+  }
   render() {
     return (
       <div>
-          <Header></Header>
+          <Header user={this.props.user}></Header>
           {React.Children.toArray(this.props.children)}
       </div>
     );
   }
 }
+function mapStateToProps(state){
+    return {
+        user: state.get("user")
+    }
+}
+function mapDispatchToProps(dispatch){
+    const allActions = {
+        sendUserPermissionsRequest: actions.sendUserPermissionsRequest,
+    };
+    return {
+        actions: bindActionCreators(allActions, dispatch)
+    };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App)

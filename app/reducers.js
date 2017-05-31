@@ -17,6 +17,9 @@ import homePageAppsForSiftReducer from 'reducers/homePageAppsForSiftReducer';
 import homePageUpcomingInterviewsReducer from 'reducers/homePageUpcomingInterviewsReducer';
 import homePageInterviewsToScoreReducer from 'reducers/homePageInterviewsToScoreReducer';
 import applicationDetailReducer from 'reducers/applicationDetailReducer';
+import userPermissionReducer from 'reducers/userPermissionReducer';
+import modalReducer from 'reducers/modalReducer';
+
 /*
  * routeReducer
  *
@@ -59,6 +62,8 @@ export default function createReducer(asyncReducers) {
     homePageAppsForSift: homePageAppsForSiftReducer,
     homePageUpcomingInterviews: homePageUpcomingInterviewsReducer,
     homePageInterviewsToScore: homePageInterviewsToScoreReducer,
+    user: userPermissionReducer,
+    modal : modalReducer,
     // global: globalReducer,
 
     // ...asyncReducers,

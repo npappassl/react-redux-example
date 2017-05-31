@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import types from 'actions/types';
 import Button from 'components/Button';
+
 const Modal = styled.div`
     position: fixed;
     top:0;
@@ -18,8 +20,17 @@ const ActionFormDiv = styled.div`
     height: 400px;
 `;
 export default class ActionRequestModal extends React.Component{
+    constructor(props){
+        super(props);
+        this.closeModal = this.closeModal.bind(this);
+    }
+    closeModal(){
+        this.props.dispatch({
+            type: types.CLOSE_MODAL
+        });
+    }
     render(){
-        if(this.props.show===true){
+        if(this.props.show.newRequest===true){
             return (
                 <Modal>
                     <ActionFormDiv>
@@ -32,7 +43,7 @@ export default class ActionRequestModal extends React.Component{
                             <label>Body</label>
                             <input></input>
                             <Button value="Save" />
-                            <Button value="Cancel" />
+                            <Button onClick={this.closeModal} value="Cancel" />
                         </form>
                     </ActionFormDiv>
                 </Modal>
