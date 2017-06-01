@@ -3,11 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 
 import SearchFilterInput from 'components/SearchFilterInput';
-
+import Spinner from 'components/Spinner';
 import messages from './messages';
 import user_icon from './images/user_icon.svg';
 import search_icon from './images/search_icon.svg';
 import log_out_icon from './images/log_out_icon.svg';
+
 
 
 const HeaderDiv = styled.div`
@@ -66,6 +67,25 @@ const NavBarIconImg = styled.img`
     margin-left: 10px;
 `;
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+    constructor(props){
+        super(props);
+        this.renderSessionSpan = this.renderSessionSpan.bind(this);
+    }
+    renderSessionSpan(){
+        if(this.props.user){
+            return(
+                <SessionSpan>
+                    <NavBarIconImg src={user_icon} width="18"/>
+                    {this.props.user.fullName||""}
+                    <NavBarIconImg src={log_out_icon} width="24" />
+                </SessionSpan>
+            );
+        } else {
+            return(
+                <SessionSpan />
+            );
+        }
+    }
     render() {
         return (
             <HeaderDiv>
@@ -93,16 +113,13 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                     </NavLi>
                 </NavUl>
                 <NavRightSpan>
+                    <Spinner />
                     <SearchSpan>
                         <SearchFilterInput placeholder="Search Applications..."/>
                         <img src={search_icon} height="20" />
                         <AdvancedSearchAnchor href="/cat-webapp/#/advancedSearch"><FormattedMessage {...messages.advancedSearchAnchorTxt} /></AdvancedSearchAnchor>
                     </SearchSpan>
-                    <SessionSpan>
-                        <NavBarIconImg src={user_icon} width="18"/>
-                            {this.props.user.fullName||""}
-                        <NavBarIconImg src={log_out_icon} width="24" />
-                    </SessionSpan>
+                    {this.renderSessionSpan()}
                 </NavRightSpan>
             </HeaderDiv>
         );

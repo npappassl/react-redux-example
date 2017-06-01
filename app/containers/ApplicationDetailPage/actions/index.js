@@ -1,11 +1,17 @@
 import types from 'actions/types';
-// import APICalls from 'APIs/index';
-import APICalls from 'APIs/mockIndex';
+import MockAPICalls from 'APIs/mockIndex';
+import APICalls from 'APIs/index';
+let APIcaller;
+if(process.env.NODE_ENV === "development"){
+    APIcaller = MockAPICalls;
+} else {
+    APIcaller = APICalls;
+}
 
 export const sendApplicationDetailRequest = function(id) {
     console.log("sendApplicationsDetaiRequest");
     return function(dispatch){
-        return APICalls.getNotCompletedApplicationDetail(id).then((response) => {
+        return APIcaller.getNotCompletedApplicationDetail(id).then((response) => {
             dispatch(loadApplicationDetailSuccess(response.json()))
         }).catch((error) => {
             throw (error);

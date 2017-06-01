@@ -1,11 +1,17 @@
 import types from 'actions/types';
-// import APICalls from 'APIs/index';
-import APICalls from 'APIs/mockIndex';
+import MockAPICalls from 'APIs/mockIndex';
+import APICalls from 'APIs/index';
+let APIcaller;
+if(process.env.NODE_ENV === "development"){
+    APIcaller = MockAPICalls;
+} else {
+    APIcaller = APICalls;
+}
 
 export const sendApplicationsForSiftRequest = function() {
     console.log("sendApplicationsRequest");
     return function(dispatch){
-        return APICalls.getForSiftApplications().then((response) => {
+        return APIcaller.getForSiftApplications().then((response) => {
             dispatch(loadApplicationsForSiftSuccess(response.json()))
         }).catch((error) => {
             throw (error);
@@ -15,7 +21,7 @@ export const sendApplicationsForSiftRequest = function() {
 export const sendUpcomingInterviewsRequest = function() {
     console.log("sendApplicationsRequest");
     return function(dispatch){
-        return APICalls.getMyUpcomingInterviews().then((response) => {
+        return APIcaller.getMyUpcomingInterviews().then((response) => {
             dispatch(loadUpcomingInterviewsSuccess(response.json()))
         }).catch((error) => {
             throw (error);
@@ -25,7 +31,7 @@ export const sendUpcomingInterviewsRequest = function() {
 export const sendInterviewsToScoreRequest = function() {
     console.log("sendApplicationsRequest");
     return function(dispatch){
-        return APICalls.getMyUpcomingInterviewsToScore().then((response) => {
+        return APIcaller.getMyUpcomingInterviewsToScore().then((response) => {
             dispatch(loadUpcomingInterviewsSuccess(response.json()))
         }).catch((error) => {
             throw (error);
