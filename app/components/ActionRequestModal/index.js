@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import types from 'actions/types';
-import Button from 'components/Button';
+
+import NewActionRequestForm from './views/NewActionRequestForm';
+import ActionRequestView from './views/ActionRequestView';
+import ShowHistoryView from './views/ShowHistoryView';
 
 const Modal = styled.div`
     position: fixed;
@@ -13,11 +16,6 @@ const Modal = styled.div`
     width: 100vw;
     background-color: rgba(0,0,0,0.2);
     z-index: 2;
-`;
-const ActionFormDiv = styled.div`
-    background-color: white;
-    border: solid 1px lightgrey;
-    height: 400px;
 `;
 export default class ActionRequestModal extends React.Component{
     constructor(props){
@@ -30,22 +28,29 @@ export default class ActionRequestModal extends React.Component{
         });
     }
     render(){
-        if(this.props.show.newRequest===true){
+        const {show, dispatch} = this.props;
+        if(show.newRequest===true){
             return (
                 <Modal>
-                    <ActionFormDiv>
-                        <h1>Add New Request</h1>
-                        <form>
-                            <label>Request Title</label>
-                            <input></input>
-                            <label>Assign To</label>
-                            <input></input>
-                            <label>Body</label>
-                            <input></input>
-                            <Button value="Save" />
-                            <Button onClick={this.closeModal} value="Cancel" />
-                        </form>
-                    </ActionFormDiv>
+                    <NewActionRequestForm
+                        applicationId={this.props.applicationId} actionTargets={show.actionTargets}
+                        dispatch={dispatch} closeModal={this.closeModal} />
+                </Modal>
+            );
+        } else if (!!show.actionRequest) {
+            return (
+                <Modal>
+                    <ActionRequestView
+                        dispatch={dispatch} closeModal={this.closeModal}
+                        actionRequest={show.actionRequest} />
+                </Modal>
+            );
+        } else if (!!show.showHistory) {
+            return (
+                <Modal>
+                    <ShowHistoryView
+                        dispatch={dispatch} closeModal={this.closeModal}
+                        application={show.showHistory} />
                 </Modal>
             );
         } else {

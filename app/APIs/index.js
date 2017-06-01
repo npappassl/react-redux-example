@@ -139,4 +139,17 @@ export default class APIcalls {
             return error
         });
     }
+    static getActionRequestTargets(){
+        const baseUrl = "services/actionRequest/getTargets";
+        const request = new Request(baseUrl, {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            return response;
+        }).catch(error => {
+            return error
+        });
+
+    }
 }

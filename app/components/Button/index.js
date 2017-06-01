@@ -8,7 +8,7 @@ const StyledButton = styled.button`
     font-weight: 600;
     font-size: 0.8em;
     text-transform: uppercase;
-
+    margin-left: 1em;
     &:hover {
         background-color: #2284A1;
     }

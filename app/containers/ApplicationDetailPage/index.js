@@ -87,12 +87,12 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
         });
     }
     render() {
-        const {applicationDetail} = this.props;
+        const {applicationDetail, dispatch} = this.props;
         if(this.props.applicationDetail){
             return (
                 <WraperDiv>
                     <LeftFlex>
-                        <AppDetailButtonList />
+                        <AppDetailButtonList dispatch={dispatch} application={applicationDetail}/>
                         <H1>
                             {applicationDetail.candidate.first + " " + this.props.applicationDetail.candidate.last}
                         </H1>
@@ -115,7 +115,7 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
                         <section>
                             <h2>Action Requests</h2>
                             <hr/>
-                            <ActionRequests requests={applicationDetail.actionRequests}/>
+                            <ActionRequests dispatch={this.props.dispatch} requests={applicationDetail.actionRequests}/>
                             <Button value="New Request"
                                 onClick={this.showActionRequestForm} />
                         </section>
@@ -134,7 +134,7 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
                         <NotesWidget notes={applicationDetail.notes}/>
                     </AppDetailList>
                     {/*  see how one writes dynamic text input updating state*/}
-                    <ActionRequestModal dispatch={this.props.dispatch} show={this.props.modal} />
+                    <ActionRequestModal dispatch={this.props.dispatch} show={this.props.modal} applicationId={applicationDetail.id}/>
                 </WraperDiv>
             )
         } else {

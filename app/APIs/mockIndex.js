@@ -280,6 +280,9 @@ export default class MockAPIcalls {
                         "actionRequests":[
                             {"id":1,"applicationId":null,"subject":"asdfasdfa","status":"NEW","entries":[{"id":1,"actionRequestId":1,"dateAndTime":"Fri 19/05/2017 15:30","comment":"asdfasdf","user":"HR User",
                                 "target":{"id":4,"target":"The King","enabled":true,"deletable":false}}
+                                ],"creationDate":1495207800000},
+                            {"id":2,"applicationId":null,"subject":"asdfasdfa","status":"NEW","entries":[{"id":1,"actionRequestId":1,"dateAndTime":"Fri 19/05/2017 15:30","comment":"asdfasdf","user":"HR User",
+                                "target":{"id":1,"target":"Originator","enabled":true,"deletable":false}}
                                 ],"creationDate":1495207800000}
                         ],
                         "reasonableAdjustments":false,"reasonableAdjustmentsDetails":null
@@ -293,4 +296,19 @@ export default class MockAPIcalls {
                         return {json: () => application};
         });
     }
+    static getActionRequestTargets(){
+        const targets = [
+            {"id":1,"target":"Originator","enabled":true,"deletable":true},
+            {"id":4,"target":"The King","enabled":true,"deletable":false}
+        ];
+        const request = new Request("services/application/notCompleted", {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            console.log(response);
+            return {json: () => targets};
+        });
+    }
+
 }
