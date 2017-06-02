@@ -6,6 +6,7 @@ import types from 'actions/types';
 import NewActionRequestForm from './views/NewActionRequestForm';
 import ActionRequestView from './views/ActionRequestView';
 import ShowHistoryView from './views/ShowHistoryView';
+import WithdrawCandidate from './views/WithdrawCandidate';
 
 const Modal = styled.div`
     position: fixed;
@@ -51,6 +52,15 @@ export default class ActionRequestModal extends React.Component{
                     <ShowHistoryView
                         dispatch={dispatch} closeModal={this.closeModal}
                         application={show.showHistory} />
+                </Modal>
+            );
+        } else if (!!show.withdrawCandidate) {
+            return (
+                <Modal>
+                    <WithdrawCandidate
+                        dispatch={dispatch} closeModal={this.closeModal}
+                        action={show.withdrawCandidate}
+                     />
                 </Modal>
             );
         } else {

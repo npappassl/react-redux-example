@@ -154,6 +154,89 @@ export default class MockAPIcalls {
             return error
         });
     }
+    static getCreateApplicationForm(){
+        const responseJSON = {
+            "applicationToEdit":null,"offices":[
+                {"description":"Not specified","id":1},{"description":"Bristol","id":2},
+                {"description":"Newcastle","id":3},{"description":"London","id":4},
+                {"description":"Edinburgh","id":5}],"sources":[
+                    {"id":1,"description":"Direct application","enabled":true},
+                    {"id":5,"description":"Evolution","enabled":true},
+                    {"id":11,"description":"Evolution","enabled":true},
+                    {"id":3,"description":"i4 Recruitment","enabled":true},
+                    {"id":9,"description":"i4 Recruitment","enabled":true},
+                    {"id":6,"description":"Nixor","enabled":true},{"id":12,"description":"Nixor","enabled":true},
+                    {"id":4,"description":"Quantum People","enabled":true},{"id":10,"description":"Quantum People","enabled":true},
+                    {"id":2,"description":"Referral","enabled":true},{"id":8,"description":"Referral","enabled":true},
+                    {"id":7,"description":"SEC Recruitment","enabled":true},
+                    {"id":13,"description":"SEC Recruitment","enabled":true}],
+                    "eligibilities":[
+                        {"description":"Yes (UK/EU Citizen)","id":1},{"description":"Yes (Work Visa)","id":2}
+                    ],"jobTitleGroups":[
+                        {"id":3008,"description":"Administration","jobTitles":[
+                            {"id":34,"description":"Office Admin Manager"},
+                            {"id":35,"description":"Administrator"}
+                        ]},{"id":3010,"description":"Application Support","jobTitles":[
+                            {"id":40,"description":"Head of Support"},
+                            {"id":41,"description":"Lead Application Support Consultant"},
+                            {"id":42,"description":"Senior Application Support Consultant"},
+                            {"id":43,"description":"Application Support Consultant"},
+                            {"id":44,"description":"Graduate Application Support Consultant"}
+                        ]},{"id":3004,"description":"Commercial Marketing","jobTitles":[
+                            {"id":17,"description":"Head of Marketing"},{"id":18,"description":"Web Developer"},
+                            {"id":19,"description":"Marketing Campaigns Manager"},{"id":20,"description":"Marketing Executive"},
+                            {"id":21,"description":"Marketing Intern"}
+                        ]},{"id":3003,"description":"Delivery","jobTitles":[
+                            {"id":15,"description":"Client Manager"},{"id":16,"description":"Technical Project Manager"}
+                        ]},{"id":3000,"description":"Development","jobTitles":[
+                            {"id":1,"description":"Principal Consultant"},{"id":2,"description":"Technical Architect"},
+                            {"id":3,"description":"Lead Developer"},{"id":4,"description":"Senior Developer"},
+                            {"id":5,"description":"Developer"},{"id":6,"description":"Graduate Developer"},{"id":7,"description":"Intern"}
+                        ]},{"id":3006,"description":"Finance","jobTitles":[
+                            {"id":24,"description":"Finance Officer"},
+                            {"id":25,"description":"Head of Internal Systems"},
+                            {"id":26,"description":"System Administrator"}
+                        ]},{"id":3009,"description":"HR","jobTitles":[
+                            {"id":36,"description":"Recruitment Manager"},
+                            {"id":37,"description":"HRBP"},
+                            {"id":38,"description":"Recruitment Officer"},
+                            {"id":39,"description":"Recruitment Admin"}
+                        ]},{"id":3007,"description":"Products","jobTitles":[
+                            {"id":27,"description":"Lead Developer"},{"id":28,"description":"Senior Developer"},
+                            {"id":29,"description":"Developer"},{"id":30,"description":"Graduate Developer"},
+                            {"id":31,"description":"Product Engineer"},{"id":32,"description":"Technical Evangelist"},
+                            {"id":33,"description":"Product Sales Consultant"}
+                        ]},{"id":3005,"description":"Sales","jobTitles":[
+                            {"id":22,"description":"Business Development Manager"},
+                            {"id":23,"description":"Sales Executive"}
+                        ]},{"id":3011,"description":"Senior Management","jobTitles":[
+                            {"id":45,"description":"Head of Development"},{"id":46,"description":"Commercial Director"},
+                            {"id":47,"description":"Delivery Director"},{"id":48,"description":"Technical Director"},
+                            {"id":49,"description":"HR Director"},{"id":50,"description":"Head of UX"},
+                            {"id":51,"description":"Sales Director"},{"id":52,"description":"Finance Director"}
+                        ]},{"id":3012,"description":"Solution Architecture","jobTitles":[
+                            {"id":53,"description":"Technical Architect"}
+                        ]},{"id":3001,"description":"Test Practice","jobTitles":[
+                            {"id":8,"description":"Lead Test Engineer"},{"id":9,"description":"Senior Test Engineer"},
+                            {"id":10,"description":"Test Engineer"},{"id":11,"description":"Graduate Test Engineer"}
+                        ]},{"id":2000,"description":"Unassigned","jobTitles":[]},
+                        {"id":3002,"description":"UX Practice","jobTitles":[
+                            {"id":12,"description":"Senior UX Designer"},{"id":13,"description":"UX Designer"},
+                            {"id":14,"description":"Graduate UX Designer"}
+                        ]}
+                    ],
+                    "socialMediaLinkTypes":[]
+                };
+        const request = new Request("services/application/notCompleted", {
+                        method: "GET",
+                        credentials: "include"
+        });
+        return fetch(request).then(response => {
+                        console.log(response);
+                        return {json: () => responseJSON};
+        });
+
+    }
     static getNotCompletedApplicationDetail(id) {
         const application = {
             "candidate":{

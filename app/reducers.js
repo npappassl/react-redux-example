@@ -19,6 +19,7 @@ import homePageInterviewsToScoreReducer from 'reducers/homePageInterviewsToScore
 import applicationDetailReducer from 'reducers/applicationDetailReducer';
 import userPermissionReducer from 'reducers/userPermissionReducer';
 import modalReducer from 'reducers/modalReducer';
+import createAppPageReducer from 'reducers/createAppPageReducer';
 
 /*
  * routeReducer
@@ -64,6 +65,7 @@ export default function createReducer(asyncReducers) {
     homePageInterviewsToScore: homePageInterviewsToScoreReducer,
     user: userPermissionReducer,
     modal : modalReducer,
+    createApplicationPageStore : createAppPageReducer,
     // global: globalReducer,
 
     // ...asyncReducers,

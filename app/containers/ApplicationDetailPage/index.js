@@ -124,7 +124,9 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
                             <hr/>
                         </section>
                         <section>
-                            <ActionButtonList buttonListPermissions={applicationDetail.appStatusPermissions}/>
+                            <ActionButtonList
+                                buttonListPermissions={applicationDetail.appStatusPermissions}
+                                dispatch={dispatch} />
                         </section>
                     </LeftFlex>
                     <AppDetailList>

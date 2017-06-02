@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Input = styled.input`
+const Select = styled.select`
     box-shadow:0 0 1px 1px rgba(33,24,26,.8);
     line-height: 2.3em;
 `;
@@ -15,7 +15,7 @@ const InputModule = styled.div`
     margin: 40px;
 `;
 
-export default class FormInput extends React.PureComponent {
+export default class FormDropDownList extends React.PureComponent {
     constructor(props){
         super(props);
     }
@@ -23,7 +23,16 @@ export default class FormInput extends React.PureComponent {
         return (
             <InputModule>
                 <Label>{this.props.displayName+":"}</Label>
-                <Input onChange={this.props.onChange} className={this.props.className} type={this.props.type} name={this.props.name}/>
+                <Select className={this.props.className}
+                    name={this.props.name}
+                    onChange={this.props.onChange||null}
+                >
+                    {this.props.options.map((option)=>{
+                        return (
+                            <option value={option.id}>{option.description}</option>
+                        );
+                    })}
+                </Select>
             </InputModule>
         )
     }

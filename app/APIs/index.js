@@ -150,6 +150,29 @@ export default class APIcalls {
         }).catch(error => {
             return error
         });
-
+    }
+    static getCreateApplicationForm(){
+        const baseUrl = "services/application/form/createForm";
+        return this.sendGetRequest(baseUrl);
+        // const request = new Request(baseUrl, {
+        //     method: "GET",
+        //     credentials: "include"
+        // });
+        // return fetch(request).then(response => {
+        //     return response;
+        // }).catch(error => {
+        //     return error
+        // });
+    }
+    static sendGetRequest(baseUrl){
+        const request = new Request(baseUrl, {
+            method: "GET",
+            credentials: "include"
+        });
+        return fetch(request).then(response => {
+            return response;
+        }).catch(error => {
+            return error
+        });
     }
 }
