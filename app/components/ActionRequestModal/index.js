@@ -7,17 +7,9 @@ import NewActionRequestForm from './views/NewActionRequestForm';
 import ActionRequestView from './views/ActionRequestView';
 import ShowHistoryView from './views/ShowHistoryView';
 import WithdrawCandidate from './views/WithdrawCandidate';
+import PassInitialSiftView from './views/PassInitialSiftView';
+import Modal from './commonStyleComponents/Modal';
 
-const Modal = styled.div`
-    position: fixed;
-    top:0;
-    bottom:0;
-    margin:0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0,0,0,0.2);
-    z-index: 2;
-`;
 export default class ActionRequestModal extends React.Component{
     constructor(props){
         super(props);
@@ -34,7 +26,7 @@ export default class ActionRequestModal extends React.Component{
             return (
                 <Modal>
                     <NewActionRequestForm
-                        applicationId={this.props.applicationId} actionTargets={show.actionTargets}
+                        applicationId={this.props.applicationDetail.id} actionTargets={show.actionTargets}
                         dispatch={dispatch} closeModal={this.closeModal} />
                 </Modal>
             );
@@ -63,6 +55,14 @@ export default class ActionRequestModal extends React.Component{
                      />
                 </Modal>
             );
+        } else if(!!show.initialSift){
+            return (
+                <Modal>
+                    <PassInitialSiftView dispatch={dispatch} closeModal={this.closeModal}
+                        jobTitleGroups={this.props.applicationDetail.jobTitleGroups} show={show}
+                        action={show.initialSift} applicationId={this.props.applicationDetail.id}/>
+                </Modal>
+            )
         } else {
             return (<div></div>)
         }

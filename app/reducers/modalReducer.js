@@ -43,6 +43,12 @@ export default function modalReducer(state = initState,action){
                 initialSift: action.payload
             }
             break;
+        case types.OPEN_CLOSE_SECOND_MODAL_P_INITIAL_SIFT:
+            return {
+                ...state,
+                initialSift: action.payload
+            }
+            break;
         case types.OPEN_MODAL_P_CV_SIFT:
             return {
                 ...state,

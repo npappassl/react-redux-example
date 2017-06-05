@@ -20,7 +20,8 @@ import applicationDetailReducer from 'reducers/applicationDetailReducer';
 import userPermissionReducer from 'reducers/userPermissionReducer';
 import modalReducer from 'reducers/modalReducer';
 import createAppPageReducer from 'reducers/createAppPageReducer';
-
+import scheduleInterviewPageReducer from 'reducers/scheduleInterviewPageReducer';
+import interviewerAvailabilityReducer from 'reducers/interviewerAvailabilityReducer';
 /*
  * routeReducer
  *
@@ -66,6 +67,8 @@ export default function createReducer(asyncReducers) {
     user: userPermissionReducer,
     modal : modalReducer,
     createApplicationPageStore : createAppPageReducer,
+    scheduleInterviewPageStore: scheduleInterviewPageReducer,
+    interviewerAvailability: interviewerAvailabilityReducer,
     // global: globalReducer,
 
     // ...asyncReducers,

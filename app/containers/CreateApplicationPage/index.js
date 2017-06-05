@@ -84,11 +84,11 @@ export class CreateApplicationPage extends React.PureComponent { // eslint-disab
                 return jobTitleGroup.id === (~~this.state.currentJobGroupId);
             })[0];
             return (
-                <FormDropDownList className="textInput" name="jobTitleGroupId" displayName="Job Title Group" options={curOptions.jobTitles} />
+                <FormDropDownList className="textInput" name="jobTitleId" displayName="Job Title" options={curOptions.jobTitles} />
             );
         } else {
             return (
-                <FormDropDownList className="textInput" name="jobTitleGroupId" displayName="Job Title Group" options={[{description:"Please select Job Title Group first.",id:-1}]} />
+                <FormDropDownList className="textInput" name="jobTitleId" displayName="Job Title" options={[{description:"Please select Job Title Group first.",id:-1}]} />
             );
         }
     }

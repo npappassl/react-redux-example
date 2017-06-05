@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
-import DropDownList from 'components/DropDownList';
 
-import * as applicationActions  from 'containers/ApplicationsPage/actions/index';
+import DropDownList from 'components/DropDownList';
+import FormInput from 'components/FormInput';
+import ParticipantsTable from './ParticipantsTable';
+
+import * as applicationActions  from './actions';
 
 const H2 = styled.h2`
     font-size: 25pt;
@@ -18,12 +21,15 @@ const Th = styled.th`
     font-weight: 400;
 `;
 class ScheduleInterviewPage extends React.PureComponent{
+    constructor(props){
+        super(props)
+    }
     componentWillMount(){
         const self = this;
-        self.props.actions.sendApplicationsRequest();
+        self.props.actions.sendScheduleInterviewPageRequest();
     }
     render(){
-        if(this.props.applicationList){
+        if(this.props.pageStore){
             return(
                 <main>
                     <H2>Schedule Interview</H2>
@@ -32,35 +38,33 @@ class ScheduleInterviewPage extends React.PureComponent{
                             <tr>
                                 <Th>Applicant</Th>
                                 <td>
-                                    <DropDownList options={this.props.applicationList.applications} />
+                                    <DropDownList options={this.props.pageStore.applications} />
                                 </td>
                             </tr>
                             <tr>
                                 <Th>Date</Th>
                                 <td>
-                                    <DropDownList options={this.props.applicationList.applications} />
+                                    <FormInput onChange={this.props.actions.sendAvailabilityRequest} type="date" />
                                 </td>
                             </tr>
                             <tr>
                                 <Th>Time</Th>
                                 <td>
-                                    <DropDownList options={this.props.applicationList.applications} />
+                                    <DropDownList options={[{name:"0.5h",id:1},{name:"1h",id:2},{name:"1.5h",id:3},{name:"2h",id:4}]} />
                                 </td>
                             </tr>
                             <tr>
                                 <Th>Interview Type</Th>
                                 <td>
-                                    <DropDownList options={this.props.applicationList.applications} />
+                                    <DropDownList options={this.props.pageStore.interviewTypes} />
                                 </td>
                             </tr>
                             <tr>
                                 <Th>Participants</Th>
-                                <td>
-                                    <DropDownList options={this.props.applicationList.applications} />
-                                </td>
                             </tr>
                         </tbody>
                     </table>
+                    <ParticipantsTable interviewers={this.props.pageStore.interviewers} availability={this.props.interviewerAvailability}/>
                 </main>
             );
         } else {
@@ -70,12 +74,14 @@ class ScheduleInterviewPage extends React.PureComponent{
 }
 function mapStateToProps(state){
     return{
-        applicationList: state.get("applicationPageStore")
+        pageStore: state.get("scheduleInterviewPageStore"),
+        interviewerAvailability: state.get("interviewerAvailability"),
     }
 }
 function mapDispatchToProps(dispatch){
     const allActions = {
-        sendApplicationsRequest: applicationActions.sendApplicationsRequest,
+        sendScheduleInterviewPageRequest: applicationActions.sendScheduleInterviewPageRequest,
+        sendAvailabilityRequest: applicationActions.sendNewAvailabilityCalendarRequest,
     };
     return {
         actions: bindActionCreators(allActions, dispatch)

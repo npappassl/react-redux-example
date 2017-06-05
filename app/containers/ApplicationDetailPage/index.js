@@ -136,7 +136,7 @@ class ApplicationDetailPage extends React.Component { // eslint-disable-line rea
                         <NotesWidget notes={applicationDetail.notes}/>
                     </AppDetailList>
                     {/*  see how one writes dynamic text input updating state*/}
-                    <ActionRequestModal dispatch={this.props.dispatch} show={this.props.modal} applicationId={applicationDetail.id}/>
+                    <ActionRequestModal dispatch={this.props.dispatch} show={this.props.modal} applicationDetail={applicationDetail}/>
                 </WraperDiv>
             )
         } else {

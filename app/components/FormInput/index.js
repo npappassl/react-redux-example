@@ -20,11 +20,20 @@ export default class FormInput extends React.PureComponent {
         super(props);
     }
     render(){
-        return (
-            <InputModule>
-                <Label>{this.props.displayName+":"}</Label>
-                <Input onChange={this.props.onChange} className={this.props.className} type={this.props.type} name={this.props.name}/>
-            </InputModule>
-        )
+        if(this.props.displayName){
+            return (
+                <InputModule>
+                    <Label>{this.props.displayName+":"}</Label>
+                    <Input onChange={this.props.onChange} className={this.props.className} type={this.props.type} name={this.props.name}/>
+                </InputModule>
+            )
+        } else {
+            return (
+                <InputModule>
+                    <Input onChange={this.props.onChange} className={this.props.className} type={this.props.type} name={this.props.name}/>
+                </InputModule>
+            )
+
+        }
     }
 }
